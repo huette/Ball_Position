@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include <math.h>
 #include <stdio.h>
-
+//test
 
 typedef struct vec2d vec2d;
 
