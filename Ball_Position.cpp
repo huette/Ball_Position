@@ -200,9 +200,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	player players[10];
 	vec2d solutions[5];
      float dis1, dis2, dis3, dis4, nearest, area, maxarea;
-      int     result, min, max, numPlayer, thirdpoint;
+      int     result, min, max, numPlayers, thirdpoint;
 	
-	numPlayer = 5;
+	numPlayers = 5;
 	min = 0;
 	max = 0;
 	maxarea = 0;
@@ -227,23 +227,23 @@ int _tmain(int argc, _TCHAR* argv[])
 	players[4].p.y = 2.5;
 	players[4].r = 0.7;
 
-	if (numPlayer==2) {
+	if (numPlayers==2) {
 		result = intersection(&solutions[0], &solutions[1], players[0].p, players[0].r, players[1].p, players[1].r);
 		solutions[4] = vdiffmean(solutions[0], solutions[1]);
 	}
 	else 
 	{
 
+	printf("Find ball by using %d players \n", numPlayers);
 	
-	
-	for (int i=0; i<numPlayer; i++) {
+	for (int i=0; i<numPlayers; i++) {
 		
 		if (players[i].r<players[min].r) min=i;
 		if (players[i].r>players[max].r) max=i;
 	}
 	
 	
-	for (int i=0; i<numPlayer;i++) {
+	for (int i=0; i<numPlayers;i++) {
 		if (i!=min && i!=max) {
 			area = triangleArea(players[min].p,players[max].p, players[i].p);
 			if (area>maxarea) 
@@ -254,12 +254,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	
 	}
-	printf("Triangle %d - %d - %d \n", min, max, thirdpoint);
+				printf("Triangle %d - %d - %d \n", min, max, thirdpoint);
 
 				result = intersection(&solutions[0], &solutions[1], players[min].p, players[min].r, players[max].p, players[max].r);
 		
 				result = intersection(&solutions[2], &solutions[3], players[min].p, players[min].r, players[thirdpoint].p, players[thirdpoint].r);
-		
+			
+				// find the closesest solution
 				dis1 = vdistance(solutions[0], solutions[2]);
 				nearest = dis1;
 				solutions[4] = vdiffmean(solutions[0], solutions[2]);
